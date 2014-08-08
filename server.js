@@ -1,6 +1,8 @@
-var express = require('express'),
-    wine = require('./routes/wines');
- 
+var express = require('express');
+    // wine = require('./routes/wines');
+	 // crm = require('./models/models');
+var modules = require('./module.js');
+	
 var app = express();
  
 app.configure(function () {
@@ -8,11 +10,13 @@ app.configure(function () {
     app.use(express.bodyParser());
 });
  
-app.get('/wines', wine.findAll);
-app.get('/wines/:id', wine.findById);
-app.post('/wines', wine.addWine);
-app.put('/wines/:id', wine.updateWine);
-app.delete('/wines/:id', wine.deleteWine);
+app.post('/addcrm', modules.crm.register);
+app.get('/wines', modules.wine.findAll);
+app.get('/wines/:id', modules.wine.findById);
+app.post('/addwines', modules.wine.addWine);
+app.put('/wines/:id', modules.wine.updateWine);
+app.delete('/wines/:id', modules.wine.deleteWine);
+
  
 app.listen(3000);
 console.log('Listening on port 3000...');

@@ -38,11 +38,14 @@ exports.findAll = function(req, res) {
 };
  
 exports.addWine = function(req, res) {
+	// res.header("Access-Control-Allow-Origin", "*");
+    // res.header("Access-Control-Allow-Headers", "X-Requested-With");
     var wine = req.body;
     console.log('Adding wine: ' + JSON.stringify(wine));
     db.collection('wines', function(err, collection) {
         collection.insert(wine, {safe:true}, function(err, result) {
             if (err) {
+				console.log("error");
                 res.send({'error':'An error has occurred'});
             } else {
                 console.log('Success: ' + JSON.stringify(result[0]));
